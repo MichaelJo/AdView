@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[TMShopCarViewController tableView:cellForRowAtIndexPath:]:TMShopCarViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AFHTTPClient HTTPRequestOperationWithRequest:success:failure:]:AFHTTPClient.m">
+      </ContextState>
+      <ContextState
+         contextName = "AdViewer.ShoppingCartManager.get (AdViewer.ShoppingCartManager)() -&gt; Swift.Array&lt;AdViewer.CartItem&gt;:ShoppingCartManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AdViewer.ShoppingCartManager.(get (AdViewer.ShoppingCartManager) -&gt; () -&gt; Swift.Array&lt;AdViewer.CartItem&gt;).(closure #1):ShoppingCartManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "-[SDSyncEngine writeJSONResponse:toDiskForClassWithName:]:SDSyncEngine.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[TMShopCarViewController deleteBtn:]:TMShopCarViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[TMShopStoreViewController tableView:cellForRowAtIndexPath:]:TMShopStoreViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "merchants">
+            </PersistentString>
+            <PersistentString
+               value = "expr [merchants count]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__43+[SDAFParseAPIClient sharedClientForClass:]_block_invoke:SDAFParseAPIClient.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[SDSyncEngine processJSONDataRecordsIntoCoreData]:SDSyncEngine.m">
+      </ContextState>
+      <ContextState
+         contextName = "AdViewer.ShoppingCartManager.(get (AdViewer.ShoppingCartManager) -&gt; () -&gt; ()).(closure #1):ShoppingCartManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "-[TMShopCarViewController listLoaded:items:]:TMShopCarViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_marrayAll">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SDAFParseAPIClient GETRequestForAllRecordsOfClass:updatedAfterDate:]:SDAFParseAPIClient.m">
+      </ContextState>
+      <ContextState
+         contextName = "AdViewer.ShoppingCartManager.(updateItemQuantity (AdViewer.ShoppingCartManager) -&gt; (Swift.String, newValue : Swift.String) -&gt; ()).(closure #1):ShoppingCartManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "url">
+            </PersistentString>
+            <PersistentString
+               value = "error">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

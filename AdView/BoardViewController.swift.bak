@@ -1,0 +1,169 @@
+import UIKit
+
+class BoardViewController: UIViewController, UINavigationBarDelegate, UIWebViewDelegate  {
+    let DbgName = "BoardView"
+    
+    let Navbar = UINavigationBar()
+    let WebView = UIWebView()
+    
+    override func viewDidLoad() {
+        println("\(DbgName) viewDidLoad")
+        super.viewDidLoad()
+
+        NavbarSet()
+        WebViewSet()
+        LayoutSet()
+        
+        //WebView.stringByEvaluatingJavaScriptFromString("document.body.innerHTML = \"\";")
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    //Let status bar show same color as navigation bar
+    func positionForBar(bar: UIBarPositioning!) -> UIBarPosition {
+        return UIBarPosition.TopAttached
+    }
+    func NavbarSet(){
+    
+        Navbar.translucent = false
+        Navbar.delegate = self;
+        
+        // Create a navigation item with a title
+        let navigationItem = UINavigationItem()
+        navigationItem.title = "AdView: V1.0.4"
+        
+        let rightBkgd = UIImage(named: "BarButtonImage")!.resizableImageWithCapInsets(
+            UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 6), resizingMode: .Stretch)
+        let rightButton = UIButton() //UIButton.buttonWithType(.Custom) as UIButton
+        rightButton.setBackgroundImage(rightBkgd, forState:UIControlState.Normal);
+        rightButton.setTitle(" Go ", forState: UIControlState.Normal);
+        rightButton.setTitleColor(UIColor.yellowColor(), forState: UIControlState.Normal);    
+        rightButton.sizeToFit()    
+        rightButton.addTarget(self, action: "ListAct:", forControlEvents: UIControlEvents.TouchUpInside);
+        let rightItem = UIBarButtonItem(customView: rightButton)
+        navigationItem.rightBarButtonItem = rightItem
+        
+        Navbar.items = [navigationItem]
+        self.view.addSubview(Navbar)
+    }    
+    func WebViewSet() {
+        
+        //WebView.
+        //WebView = UIWebView(frame: self.view.frame) as UIWebView
+        
+        WebView.scalesPageToFit = true
+        WebView.delegate = self
+        self.view.addSubview(WebView)
+        
+        // var url = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("pageName", ofType: "html"))
+        //let url0 = NSURL(string: "about:blank")
+        
+        //var path = NSBundle.mainBundle().bundlePath
+        let bundle = NSBundle.mainBundle()
+        //It is actually Test1/Test1/html-dashboard
+        let path0 = bundle.pathForResource("index", ofType: "html", inDirectory: "html-dashboard")
+        println("\(DbgName) html0=\(path0)")
+        let path1 = "file://\(path0!)" //Must as path0!,may add params as "?user=1&pass=2"       
+        path1.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        println("\(DbgName) html1=\(path1)")        
+        let url = NSURL(string: path1)      
+        let request = NSURLRequest(URL: url!)
+        WebView.loadRequest(request)
+        //WebView.stringByEvaluatingJavaScriptFromString("document.body.innerHTML = \"\";")
+    }
+    func LayoutSet(){
+        
+        var layout_dict = Dictionary <String, UIView>()
+        layout_dict["Navbar"] = Navbar
+        Navbar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        layout_dict["WebView"] = WebView
+        WebView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        //NSLayoutConstraint.deactivateConstraints(self.view.constraints())
+        
+        //self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+        //    "V:|-20-[Navbar]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: layout_dict))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|-20-[Navbar]-[WebView]|", options: nil, metrics: nil, views: layout_dict))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|-0-[Navbar]-0-|", options: nil, metrics: nil, views: layout_dict))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|-0-[WebView]-0-|", options: nil, metrics: nil, views: layout_dict))
+    }
+//----------------------------------------------------------------------------        
+    func webViewDidStartLoad(webView: UIWebView) {
+        println("\(DbgName) webViewDidStartLoad ")
+    }
+    func webViewDidFinishLoad(webView: UIWebView) {
+        println("\(DbgName) webViewDidFinishLoad ")
+    }
+    func webView(webView: UIWebView!, didFailLoadWithError error: NSError!) {
+        println("\(DbgName) didFailLoadWithError \(error.code)")
+    }
+    func webView(webView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
+        
+        let reqStr = request.URL.absoluteString
+        let headStr = "js-call://"
+        let headCnt = countElements(headStr)
+        if (reqStr!.hasPrefix(headStr)) {
+            println("\(DbgName) shouldStartLoadWithRequest \(reqStr!)")
+            let i0 = advance(reqStr!.startIndex, headCnt) //
+            //let i1 = advance(reqStr!.endIndex, 0) //
+            let range = i0..<reqStr!.endIndex
+            let tailStr = reqStr!.substringWithRange( range )
+            println("\(DbgName) shouldStartLoadWithRequest \(tailStr)")
+            switch tailStr{
+            case "Login":
+				let view = UserListViewController()
+				view.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+				//report_view.modalTransitionStyle =
+				self.presentViewController(view, animated: true, completion: nil)
+            case "Settings":
+				let view = AdModeViewController()
+				view.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+				//report_view.modalTransitionStyle =
+				self.presentViewController(view, animated: true, completion: nil)
+            case "ViewList":
+				let view = AdListViewController()
+				view.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+				//report_view.modalTransitionStyle =
+				self.presentViewController(view, animated: true, completion: nil)
+            default:
+                //WechatSendLink()
+                return false
+            }
+            return false
+        }
+        return true
+    }
+//----------------------------------------------------------------------------   
+   func GotoAdList() {
+        if (CellAry.count==0){
+            let alert = UIAlertView(title: "Alert", message: "Still waiting for the AD list.",
+                delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+            return
+        }
+        NSLog("\(DbgName) GotoAdListViewAct")
+        
+        let view = AdListViewController()
+        view.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+        //rate_view.modalTransitionStyle =
+        self.presentViewController(view, animated: true, completion: nil)
+    }
+
+    func ListAct(sender: AnyObject) {
+        println("\(DbgName) goto AdListView")
+        GotoAdList()
+        /*
+        let view = AdListViewController()
+        view.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+        //report_view.modalTransitionStyle =
+        self.presentViewController(view, animated: true, completion: nil)
+        */
+    }
+
+}
+//http://blog.csdn.net/zrhloveswallow/article/details/25195461
+//<a href="js-call://other/lwme.cnblogs.com">

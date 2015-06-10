@@ -1,0 +1,12 @@
+/* Localized versions of Info.plist keys */
+
+/*
+ Created by Alex Song on 1/1/15.
+ Copyright (c) 2015 AditMax All rights reserved.
+ */
+
+"BUTTON_TITLE" = "按钮";
+"CONTINUE" = "继续";
+"HELLO" = "你好";
+"LABEL_TEXT" = "你好你好吧";
+"MESSAGE" = "你好你好吧！";

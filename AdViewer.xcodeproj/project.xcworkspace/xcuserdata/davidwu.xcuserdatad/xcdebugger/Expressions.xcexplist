@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "AdView.AdListViewController.webView (AdView.AdListViewController)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UIWebView&gt;, shouldStartLoadWithRequest : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSURLRequest&gt;, navigationType : C.UIWebViewNavigationType) -&gt; Swift.Bool:AdListViewController.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
